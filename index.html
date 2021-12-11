@@ -16,19 +16,26 @@
 
 
         <main class = "card flex-row justify-space-between">
-            <div class ="card-header ">
-                <h2> Search for a city:</h2>
+            <div class = "col-12 col-md-4">
+              <div class ="card-header ">
+                 <h2> Search for a city:</h2>
              
-               <form id = "user-form" class ="card-body">
-                  <input name="cityname" id="cityname" type="text" autofocus="true" class="form-input" />
-                   <div>
-                      <button type="submit" class="btn">Search</button>
-                   </div> 
+                   <form id = "user-form" class ="card-body">
+                      <input name="cityname" id="country" type="text" autofocus="true" class="form-input" />
+                       <div>
+                            <button type="submit" class="btn">Search</button>
+                        </div> 
 
-                </form> 
+                    </form> 
+
+                    <div class="col-12 col-md-8">
+                         <h2 class="subtitle">search result <span id="result-search-term"></span></h2>
+                           <div id="result-container" class="list-group"></div>
+                    </div>
+
+                </div>
             </div>
         
-          </div>
         </main>
      
      
