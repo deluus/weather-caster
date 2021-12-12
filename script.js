@@ -5,23 +5,6 @@ var resultContainerEl =document.querySelector('#result-container');
 var resultSearchTerm =document.querySelector('#result-search-term');
 var pastSearches = JSON.parse(window.localStorage.getItem('pastSearches')) || [];
 
-var formSubmitHandler = function (event) {
-    event.preventDefault();
-  
-    var cityName= cityNameEl.value.trim();
-  
-    if (cityName) {
-      geoData(cityName);
-  
-      resultContainerEl.textContent = '';
-      cityNameEl.value = '';
-    } else {
-      alert('Please enter a City name');
-      console.log(cityName)
-    }
-};
-
-
 // render/ dispaly weather data to the page
 
 //  form the <form> element. listen to the "submit"
@@ -56,8 +39,8 @@ $('.container').on('click','button',function(event){
 
 // fetch the Geo data (latitude and longitute)
 //    required info : Q = name of the city 
-                //  : limit = number of cities to list
-                //  appid = your custom API key
+//  : limit = number of cities to list
+//  appid = your custom API key
 
  function geoData(cityName) {
 
@@ -95,10 +78,19 @@ function oneCall(lat, lon) {
     .then(function(data){
       var currentDate = moment(data.current.dt, 'X').format('L')
       var forecastDate = moment(data.daily[1].dt, 'X').format('L')
+     
       //Define vars for all data that you will need Temp, Humidity, WindSpeed, UVIndex and Icon
+      var temp = data.weather
+      var humidity = data.weather;
+      var windspeed =data.wind;
+      var uvI = data.weather;
+      var name = data;
+      var icon = data.weather;
+     
+     
         console.log(data)
         console.log(currentDate, forecastDate)
-        //
+        
       for (i=1; i < data.daily.length - 2; i++) {
         // Define vars and elements for forecast cards
       }
@@ -116,38 +108,6 @@ function oneCall(lat, lon) {
       resultContainerEl.textContent = 'No cities found.';
       return;
     }
-
-
-    
-//   for (var i=0; i < city.length; i ++){    
-//     var cityName = city[i] + '/' + city;
-
-//     var cityEl = document.createElement('a');
-//     cityEl.classList = 'list-item flex-row justify-space-between align-center';
-//     cityEl.setAttribute('href', './single-repo.html?repo=' + cityName);
-
-//     var titleEl = document.createElement('span');
-//     titleEl.textContent = cityName;
-
-//     cityEl.appendChild(titleEl);
-
-//     var statusEl = document.createElement('span');
-//     statusEl.classList = 'flex-row align-center';
-
-//     if (city[i].city_count >= 5) {
-//       statusEl.innerHTML =
-//         "<i class='fas fa-times status-icon icon-danger'></i>" + city[i] + ' issue(s)';
-//     } else {
-//       statusEl.innerHTML = "<i class='fas fa-check-square status-icon icon-success'></i>";
-//     }
-
-//     cityEl.appendChild(statusEl);
-
-//     resultContainerEl.appendChild(cityEl);
-  
-// };
-
-
 //    = lat
 //    = lon
 //    = appid
