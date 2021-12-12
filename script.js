@@ -3,6 +3,7 @@ var cityNameEl = document.querySelector('#cityname');
 var btnEl =document.querySelector('#btn')
 var resultContainerEl =document.querySelector('#result-container');
 var resultSearchTerm =document.querySelector('#result-search-term');
+var pastSearches = JSON.parse(window.localStorage.getItem('pastSearches')) || [];
 
 var formSubmitHandler = function (event) {
     event.preventDefault();
@@ -18,18 +19,31 @@ var formSubmitHandler = function (event) {
       alert('Please enter a City name');
       console.log(cityName)
     }
-  };
+};
 
 
 // render/ dispaly weather data to the page
 
 //  form the <form> element. listen to the "submit"
-$('.user-form').on('submit', function() {
-    var city = $(this).siblings('.cityname').val();
-    var country = $(this).parent().attr('id');
+$('#user-form').on('submit', function() {
+    var city = $(this).children('#cityInput').val();
+    event.preventDefault()
+    if(pastSearches.indexOf(city) === -1) {
+    pastSearches.push(city);
+    window.localStorage.setItem("pastSearches",  JSON.stringify(pastSearches));
+    }
 
-    localStorage.setItem(city, country);
-    console.log(city, country)
+    if (city) {
+      geoData(city);
+  
+      resultContainerEl.textContent = '';
+      cityNameEl.value = '';
+    } else {
+      alert('Please enter a City name');
+      console.log()
+    }
+
+    console.log(city)
 })
 
 // // form the <button> element, listen to the "click"
@@ -48,7 +62,7 @@ $('.container').on('click','button',function(event){
  function geoData(cityName) {
 
     var geoApi = "77eaa9b7e9cd8a601a1ff0d76468db72"
-    var geoUrl = 'http://api.openweathermap.org/data/2.5/onecall?'+ cityName;
+    var geoUrl = " https://api.openweathermap.org/data/2.5/weather?q="+cityName + "&appid=" +geoApi;
 
     fetch(geoUrl)
 
@@ -59,15 +73,15 @@ $('.container').on('click','button',function(event){
     .then(function(data){
         console.log(data);
 
-        oneCall(lat,lon )
+        oneCall(data.coord.lat, data.coord.lon )
     });
 
  }
 
 // fetch the one call weather data
 function oneCall(lat, lon) {
-  var oneApi = " 77eaa9b7e9cd8a601a1ff0d76468db72"
-  var oneUrl = "http://api.openweathermap.org/data/2.5/forecast?id=524901&appid=${API Key} ";
+  var oneApi = "77eaa9b7e9cd8a601a1ff0d76468db72"
+  var oneUrl = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${oneApi}&units=imperial`;
   
      
     
@@ -79,8 +93,15 @@ function oneCall(lat, lon) {
 
     })
     .then(function(data){
+      var currentDate = moment(data.current.dt, 'X').format('L')
+      var forecastDate = moment(data.daily[1].dt, 'X').format('L')
+      //Define vars for all data that you will need Temp, Humidity, WindSpeed, UVIndex and Icon
         console.log(data)
-
+        console.log(currentDate, forecastDate)
+        //
+      for (i=1; i < data.daily.length - 2; i++) {
+        // Define vars and elements for forecast cards
+      }
         // render to page.
         // var displayWeather = function(){
             
