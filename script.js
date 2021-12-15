@@ -80,6 +80,7 @@ function oneCall(lat, lon) {
       var forecastDate = moment(data.daily[1].dt, 'X').format('L')
      
       //Define vars for all data that you will need Temp, Humidity, WindSpeed, UVIndex and Icon
+
       var temp = data.weather
       var humidity = data.weather;
       var windspeed =data.wind;
@@ -93,27 +94,28 @@ function oneCall(lat, lon) {
         
       for (i=1; i < data.daily.length - 2; i++) {
         // Define vars and elements for forecast cards
+        var img = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
+        var temp = $('<div>').attr('id', + data.weather[0].temperature);
+        var humidity = data.weather;
+        var windspeed =data.wind;
+        var uvI = data.weather;
+        var name = data;
+        var icon = data.weather;
+
+
       }
-        // render to page.
-        // var displayWeather = function(){
-            
-        // }
+
+     
     });
 
  }
 
-
+// display fxn
   var displayWeather = function (city) {
     if (city.length === 0) {
       resultContainerEl.textContent = 'No cities found.';
       return;
     }
-//    = lat
-//    = lon
-//    = appid
-//    = untis -imperial
-//    = exlude - minutely, hourly
-
 
 
 
