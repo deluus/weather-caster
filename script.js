@@ -28,15 +28,6 @@ $('#user-form').on('submit', function() {
 
     console.log(city)
 })
-
-// // form the <button> element, listen to the "click"
- //  select the <input>, get its value, and provide it to the geo API
-//  form the <button> container element , listen to the "click"
-$('.container').on('click','button',function(event){
-
-    event.target
-});
-
 // fetch the Geo data (latitude and longitute)
 //    required info : Q = name of the city 
 //  : limit = number of cities to list
@@ -47,6 +38,8 @@ $('.container').on('click','button',function(event){
     var geoApi = "77eaa9b7e9cd8a601a1ff0d76468db72"
     var geoUrl = " https://api.openweathermap.org/data/2.5/weather?q="+cityName + "&appid=" +geoApi;
 
+    // getting API response and returning it with a parsing into js object 
+    // THEN function calling oneCall function for API data results 
     fetch(geoUrl)
 
     .then(function(response){
@@ -78,15 +71,16 @@ function oneCall(lat, lon) {
     .then(function(data){
       var currentDate = moment(data.current.dt, 'X').format('L')
       var forecastDate = moment(data.daily[1].dt, 'X').format('L')
+
      
+    
       //Define vars for all data that you will need Temp, Humidity, WindSpeed, UVIndex and Icon
 
-      var temp = data.weather
-      var humidity = data.weather;
-      var windspeed =data.wind;
-      var uvI = data.weather;
-      var name = data;
-      var icon = data.weather;
+      var temp = data.list.main[3];
+      var humidity = data.list.main[1];
+      var windspeed =data.list.wind[2];
+      // var uvI = data.weather;
+      var icon = data.list[i].weather[0].icon;
      
      
         console.log(data)
@@ -94,21 +88,19 @@ function oneCall(lat, lon) {
         
       for (i=1; i < data.daily.length - 2; i++) {
         // Define vars and elements for forecast cards
-        var img = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
-        var temp = $('<div>').attr('id', + data.weather[0].temperature);
-        var humidity = data.weather;
-        var windspeed =data.wind;
-        var uvI = data.weather;
-        var name = data;
-        var icon = data.weather;
-
-
+        document.getElementById("day" + (i + 1 )+"Min").innerHTML = "Min" + Number(data.list[i].main.temp_min -280.23).toFixed(1)+"*";
       }
+      for (i=1; i < data.daily.length - 2; i++) {
+        // Define vars and elements for forecast cards
+        document.getElementById("day" + (i + 1 )+"Max").innerHTML = "Max" + Number(data.list[i].main.temp_max -280.23).toFixed(1)+"*";
+      }
+      for (i=1; i < data.daily.length - 2; i++){
+        document.getElementById("img" + (i + 1 )).src = "https://openweathermap.org/img/wn/" + data.list[i].weather[0].icon+ ".png";
+      }
+    })
+    .catch(err => alert("something went wrong")
 
-     
-    });
-
- }
+    )};
 
 // display fxn
   var displayWeather = function (city) {
