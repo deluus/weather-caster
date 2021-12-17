@@ -50,3 +50,8 @@ h1{
 input{
   border-radius: 10px;
  } 
+ .btn{
+   display:flex;
+   margin-top: 20px;
+   background-color: skyblue;
+ }

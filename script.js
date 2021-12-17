@@ -93,7 +93,21 @@ function oneCall(lat, lon) {
        
         
         
-    
+      for (i=1; i < data.daily.length - 2; i++) {
+        // Define vars and elements for forecast cards
+        document.getElementById("div" + (i + 1 )+"Min").innerHTML = "Min" + Number(data.list[i].main.temp_min -280.23).toFixed(1)+"*";
+      }
+      for (i=1; i < data.daily.length - 2; i++) {
+        // Define vars and elements for forecast cards
+        document.getElementById("div" + (i + 1 )+"Max").innerHTML = "Max" + Number(data.list[i].main.temp_max -280.23).toFixed(1)+"*";
+      }
+      for (i=1; i < data.daily.length - 2; i++){
+        document.getElementById("cityname" + (i + 1 )).src = "https://openweathermap.org/img/wn/" + data.list[i].weather[0].icon+ ".png";
+      }
+    })
+    .catch(err => alert("something went wrong")
+
+    )};
 
 // display fxn
   var displayWeather = function (city) {
@@ -101,24 +115,9 @@ function oneCall(lat, lon) {
       resultContainerEl.textContent = 'No cities found.';
       return;
     }
-    for (i=1; i < data.daily.length - 2; i++) {
-      // Define vars and elements for forecast cards
-      document.getElementById("div" + (i + 1 )+"Min").innerHTML = "Min" + Number(data.list[i].main.temp_min -280.23).toFixed(1)+"*";
-    }
-    for (i=1; i < data.daily.length - 2; i++) {
-      // Define vars and elements for forecast cards
-      document.getElementById("div" + (i + 1 )+"Max").innerHTML = "Max" + Number(data.list[i].main.temp_max -280.23).toFixed(1)+"*";
-    }
-    for (i=1; i < data.daily.length - 2; i++){
-      document.getElementById("cityname" + (i + 1 )).src = "https://openweathermap.org/img/wn/" + data.list[i].weather[0].icon+ ".png";
-    }
-  }
-  .catch(err => alert("something went wrong");
-
-  )};
 
 
 
-//  print/ render the weather data to the page
+//  print/ render the weather datat to the page
 userFormEl.addEventListener('submit', formSubmitHandler)
-};
+  };
