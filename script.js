@@ -36,7 +36,7 @@ $('#user-form').on('submit', function() {
  function geoData(cityName) {
 
     var geoApi = "77eaa9b7e9cd8a601a1ff0d76468db72"
-    var geoUrl = " https://api.openweathermap.org/data/2.5/weather?q="+cityName + "&appid=" +geoApi;
+    var geoUrl = "https://api.openweathermap.org/data/2.5/weather?q="+cityName + "&appid=" +geoApi;
 
     // getting API response and returning it with a parsing into js object 
     // THEN function calling oneCall function for API data results 
@@ -58,49 +58,42 @@ $('#user-form').on('submit', function() {
 function oneCall(lat, lon) {
   var oneApi = "77eaa9b7e9cd8a601a1ff0d76468db72"
   var oneUrl = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${oneApi}&units=imperial`;
-  
-     
-    
+
 
     fetch(oneUrl)
 
     .then(function(response){
         return response.json();
-
     })
     .then(function(data){
       var currentDate = moment(data.current.dt, 'X').format('L')
       var forecastDate = moment(data.daily[1].dt, 'X').format('L')
-
-     
-    
+      
+      console.log(data)
+      console.log(currentDate, forecastDate)
+      
       //Define vars for all data that you will need Temp, Humidity, WindSpeed, UVIndex and Icon
+      function dispalyWeather(data){
+      var name = data;
+      var temp = data.current;
+      var humidity = data.current;
+      var wind_speed = data.weather;
+      var uvi = data.current;
+      var icon = data.weather[0];
+      
+      }
 
-      var temp = data.list.main[3];
-      var humidity = data.list.main[1];
-      var windspeed =data.list.wind[2];
-      // var uvI = data.weather;
-      var icon = data.list[i].weather[0].icon;
-     
-     
-        console.log(data)
-        console.log(currentDate, forecastDate)
+      console.log(name,icon,temp,humidity,wind_speed,uvi);
+
+      // let weatherInfo =
+      // `<div class="card cell medium-4" style+"width; 300px;">
+      //  <div class=name"
+      //  <h1 ${name},${temp},${humidity},</h1>
+      //  </div>`
+       
         
-      for (i=1; i < data.daily.length - 2; i++) {
-        // Define vars and elements for forecast cards
-        document.getElementById("day" + (i + 1 )+"Min").innerHTML = "Min" + Number(data.list[i].main.temp_min -280.23).toFixed(1)+"*";
-      }
-      for (i=1; i < data.daily.length - 2; i++) {
-        // Define vars and elements for forecast cards
-        document.getElementById("day" + (i + 1 )+"Max").innerHTML = "Max" + Number(data.list[i].main.temp_max -280.23).toFixed(1)+"*";
-      }
-      for (i=1; i < data.daily.length - 2; i++){
-        document.getElementById("img" + (i + 1 )).src = "https://openweathermap.org/img/wn/" + data.list[i].weather[0].icon+ ".png";
-      }
-    })
-    .catch(err => alert("something went wrong")
-
-    )};
+        
+    
 
 // display fxn
   var displayWeather = function (city) {
@@ -108,9 +101,24 @@ function oneCall(lat, lon) {
       resultContainerEl.textContent = 'No cities found.';
       return;
     }
+    for (i=1; i < data.daily.length - 2; i++) {
+      // Define vars and elements for forecast cards
+      document.getElementById("div" + (i + 1 )+"Min").innerHTML = "Min" + Number(data.list[i].main.temp_min -280.23).toFixed(1)+"*";
+    }
+    for (i=1; i < data.daily.length - 2; i++) {
+      // Define vars and elements for forecast cards
+      document.getElementById("div" + (i + 1 )+"Max").innerHTML = "Max" + Number(data.list[i].main.temp_max -280.23).toFixed(1)+"*";
+    }
+    for (i=1; i < data.daily.length - 2; i++){
+      document.getElementById("cityname" + (i + 1 )).src = "https://openweathermap.org/img/wn/" + data.list[i].weather[0].icon+ ".png";
+    }
+  }
+  .catch(err => alert("something went wrong");
+
+  )};
 
 
 
-//  print/ render the weather datat to the page
+//  print/ render the weather data to the page
 userFormEl.addEventListener('submit', formSubmitHandler)
-}
+};
