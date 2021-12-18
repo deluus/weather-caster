@@ -85,11 +85,11 @@ function oneCall(lat, lon) {
         for (i = 1; i < data.daily.length - 2; i++) {
 
 
-        var name = $("<div>").attr("src", "https://openweathermap.org/img/w/" + data);
-        var temp= $("<div>").attr("src", "https://openweathermap.org/img/w/" + data.current);
-        var humidity = $("<div>").attr("src", "https://openweathermap.org/img/w/" + data.current);
-        var wind_speed = $("<div>").attr("src", "https://openweathermap.org/img/w/" + data.weather);
-        var uvi = $("<div>").attr("src", "https://openweathermap.org/img/w/" + data.current);
+        var name = $("<div>").attr("src", "https://openweathermap.org" + data);
+        var temp= $("<div>").attr("src", "https://openweathermap.org" + data.current);
+        var humidity = $("<div>").attr("src", "https://openweathermap.org" + data.current);
+        var wind_speed = $("<div>").attr("src", "https://openweathermap.org" + data.weather);
+        var uvi = $("<div>").attr("src", "https://openweathermap.org" + data.current);
         var img = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
 
         
