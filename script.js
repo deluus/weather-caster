@@ -81,10 +81,15 @@ function oneCall(lat, lon) {
         // var uvi = data.current;
         // var icon = data.weather[0];
 
-        
+        var displayWeather = function (city) {
+          if (city.length === 0) {
+            resultContainerEl.textContent = 'No cities found.';
+            return;
+          }
+
         for (i = 1; i < data.daily.length - 2; i++) {
 
-
+        var card = $('<div>')
         var name = $("<div>").attr("src", "https://openweathermap.org" + data);
         var temp= $("<div>").attr("src", "https://openweathermap.org" + data.current);
         var humidity = $("<div>").attr("src", "https://openweathermap.org" + data.current);
@@ -92,7 +97,8 @@ function oneCall(lat, lon) {
         var uvi = $("<div>").attr("src", "https://openweathermap.org" + data.current);
         var img = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
 
-        
+       resultContainerEl.append(img)
+       resultContainerEl.append(name, temp,humidity,wind_speed,uvi);
 
 
       // function addElement() {
@@ -124,21 +130,17 @@ function oneCall(lat, lon) {
       for (i = 1; i < data.daily.length - 2; i++) {
         document.getElementById("cityname" + (i + 1)).src = "https://openweathermap.org/img/wn/" + data.list[i].weather[0].icon + ".png";
       }
-    })
+    }
     // .catch(err => alert("something went wrong")
 
     
-}
+});
 
 // display fxn
-var displayWeather = function (city) {
-  if (city.length === 0) {
-    resultContainerEl.textContent = 'No cities found.';
-    return;
-  }
+
 
 
 
   //  print/ render the weather datat to the page
-  userFormEl.addEventListener('submit', city)
+  userFormEl.addEventListener('submit', geoData)
 };
