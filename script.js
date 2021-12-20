@@ -18,8 +18,8 @@ function listItem(citiesHistory) {
 };
 
 //  form the <form> element. listen to the "submit"
-$('#user-form').on('submit', function () {
-  var city = $(this).children('#cityInput').val();
+$('.btn').on('click', function () {
+  var city = $('#cityInput').val()
   event.preventDefault()
 
   if (city) {
@@ -83,14 +83,15 @@ function oneCall(lat, lon) {
         var card = $('<div>').addClass('card').addClass('col-9')
         var cardBody = $('<div>').addClass('card-body p-2')
         var date = $('<div>').text(moment(data.current.dt, 'X').format('LL')).addClass('card-text');
-        //var name = $("<div>").attr("src", "https://openweathermap.org" + data);
+        var name = $("<div>").text(data.main).addClass('card-text').css('paddingTop', '20px');
         var temp= $("<div>").text('Temp: '+ data.current.temp + 'F').addClass('card-text').css('paddingTop', '10px');
+        var uvi = $("<div>").text('UVI: ' + data.current.uvi).addClass('card-text').css('paddingTop', '10px');
         var humidity = $("<div>").text('Humidity: ' + data.current.humidity + '%').addClass('card-text').css('paddingTop', '10px');
         var wind_speed = $("<div>").text('Wind Speed: ' + data.current.wind_speed + 'MPH').addClass('card-text').css('paddingTop', '10px');
         var img = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png");
 
         date.append(img)
-        cardBody.append(date, temp,humidity,wind_speed);
+        cardBody.append(name,date,temp,uvi,humidity,wind_speed);
         card.append(cardBody)
         $("#result-container").append(card)
       console.log(data)
@@ -171,6 +172,6 @@ function oneCall(lat, lon) {
   userFormEl.addEventListener('submit', geoData)
 };
 
-for(var i = 0; i<pastSearches.length; i++) {
+for(var i = 0; i < pastSearches.length; i++) {
   listItem(pastSearches[i]);
 }
