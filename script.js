@@ -172,6 +172,6 @@ function oneCall(lat, lon) {
   userFormEl.addEventListener('submit', geoData)
 };
 
-for(var i = 0; i < pastSearches.length; i++) {
+for(var i = 0; i < 5; i++) {
   listItem(pastSearches[i]);
 }
