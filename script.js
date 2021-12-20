@@ -91,7 +91,7 @@ function oneCall(lat, lon, cityName) {
         var img = $("<img>").attr("src", "https://openweathermap.org/img/w/" + data.current.weather[0].icon + ".png");
 
         date.append(img)
-        cardBody.append(name,date,temp,uvi,humidity,wind_speed);
+        cardBody.append(cityName,date,temp,wind_speed,humidity,uvi);
         card.append(cardBody)
         $("#result-container").append(card)
       console.log(data)
