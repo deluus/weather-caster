@@ -19,3 +19,12 @@
    Description :
    Basic weatehr app will give ou the ability to search for you desired city.
    The app will display the name, date, temp, Uvi, Humidity, wind speed of the current city of search, as well as give you a 5 day forescast, and an icon to show each day potential condition. The app also save the 5 most recent searches for the user. 
+
+
+     ![](HW6.png)
+
+  link repo: https://github.com/deluus/weather-forecast
+
+
+  link page: https://deluus.github.io/weather-forecast/
+
