@@ -83,7 +83,7 @@ function oneCall(lat, lon) {
         var card = $('<div>').addClass('card').addClass('col-9')
         var cardBody = $('<div>').addClass('card-body p-2')
         var date = $('<div>').text(moment(data.current.dt, 'X').format('LL')).addClass('card-text');
-        var name = $("<div>").text(data.main).addClass('card-text').css('paddingTop', '20px');
+        var name = $("<div>").text(data.maind).addClass('card-text').css('paddingTop', '20px');
         var temp= $("<div>").text('Temp: '+ data.current.temp + 'F').addClass('card-text').css('paddingTop', '10px');
         var uvi = $("<div>").text('UVI: ' + data.current.uvi).addClass('card-text').css('paddingTop', '10px');
         var humidity = $("<div>").text('Humidity: ' + data.current.humidity + '%').addClass('card-text').css('paddingTop', '10px');
@@ -171,7 +171,12 @@ function oneCall(lat, lon) {
   //  print/ render the weather datat to the page
   userFormEl.addEventListener('submit', geoData)
 };
+for (var i = pastSearches.length - 1; i >= pastSearches.length - 5; i --){
+  if(i >= 0){
+    listItem(pastSearches[i]);
+  }
+// }
 
-for(var i = 0; i < 5; i++) {
-  listItem(pastSearches[i]);
+// for(var i = 0; i< 5; i++) {
+//   listItem(pastSearches[i]);
 }
