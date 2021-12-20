@@ -69,7 +69,7 @@ function geoData(cityName) {
 // fetch the one call weather data
 function oneCall(lat, lon, cityName) {
   var oneApi = "77eaa9b7e9cd8a601a1ff0d76468db72"
-  var oneUrl = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${oneApi}&units=imperial`;
+  var oneUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${oneApi}&units=imperial`;
 
 
   fetch(oneUrl)
