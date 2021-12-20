@@ -61,13 +61,13 @@ function geoData(cityName) {
     .then(function (data) {
       console.log(data);
 
-      oneCall(data.coord.lat, data.coord.lon)
+      oneCall(data.coord.lat, data.coord.lon,cityName)
     });
 
 }
 
 // fetch the one call weather data
-function oneCall(lat, lon) {
+function oneCall(lat, lon, cityName) {
   var oneApi = "77eaa9b7e9cd8a601a1ff0d76468db72"
   var oneUrl = `http://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${oneApi}&units=imperial`;
 
@@ -83,7 +83,7 @@ function oneCall(lat, lon) {
         var card = $('<div>').addClass('card').addClass('col-9')
         var cardBody = $('<div>').addClass('card-body p-2')
         var date = $('<div>').text(moment(data.current.dt, 'X').format('LL')).addClass('card-text');
-        var name = $("<div>").text(data.maind).addClass('card-text').css('paddingTop', '20px');
+        var name = $("<div>").text(cityName).addClass('card-text').css('paddingTop', '20px');
         var temp= $("<div>").text('Temp: '+ data.current.temp + 'F').addClass('card-text').css('paddingTop', '10px');
         var uvi = $("<div>").text('UVI: ' + data.current.uvi).addClass('card-text').css('paddingTop', '10px');
         var humidity = $("<div>").text('Humidity: ' + data.current.humidity + '%').addClass('card-text').css('paddingTop', '10px');
